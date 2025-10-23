@@ -1,0 +1,10 @@
+{
+    "S-experiment_v1-Group1-ID1": {
+        "id": "1",
+        "completion_status": "unknown"
+    },
+    "S-experiment_v1-Group2-ID1": {
+        "id": "2",
+        "completion_status": "unknown"
+    }
+}
