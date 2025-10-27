@@ -278,7 +278,7 @@ def plot_combined(
 def main():
     from tqdm import tqdm
 
-    data_type = "raw_data"
+    data_type = "raw_data_without_outlier"
     data_dir = f'processed_data/{data_type}'
 
     # Path to JSON with removal decisions
@@ -289,7 +289,7 @@ def main():
     with open(decision_json_path, 'r') as f:
         removal = json.load(f)
 
-    break_idxs = [100-10-1, 100+110+170-10-1, 100+(110+170)*2-10-1]
+    break_idxs = []
     allowed_groups = ["1", "2"]
 
     for fname in tqdm(os.listdir(data_dir)):
@@ -318,7 +318,7 @@ def main():
             participant_id=id_only,
             group_tag=grp_tag,
             removed=removed,
-            avg_ranges=[(100,105), (380, 385), (660, 665)],
+            avg_ranges=[],
             # NEW: choose what to average: "error" or "angle"
             avg_on="angle",
         )

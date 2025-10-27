@@ -503,7 +503,7 @@ def save_results_to_json(results, output_path):
 
 
 if __name__ == "__main__":
-    mode = "raw_data"
+    mode = "raw_data_without_outlier"
     data_folder = f"processed_data/{mode}"
     result_folder = "plotting_helper_files"
     os.makedirs(result_folder, exist_ok=True)

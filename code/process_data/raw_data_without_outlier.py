@@ -17,10 +17,10 @@ def process_single_file(input_path: str, output_path: str) -> None:
     # Compute and add the 'angle_diff' column
     df = util.compute_angle_diff(df)
 
-    df = df.iloc[30:].reset_index(drop=True)
-    if df.empty:
-        df.to_csv(output_path, index=False)
-        return
+    # df = df.iloc[30:].reset_index(drop=True)
+    # if df.empty:
+    #     df.to_csv(output_path, index=False)
+    #     return
 
     # Updated: apply outlier removal to the 'angle_diff' column
     # This will replace any angle_diff outside [-60, 60] by the mean of its neighbors,
@@ -32,7 +32,7 @@ def process_single_file(input_path: str, output_path: str) -> None:
         replace_with="median",
     )
     print(f"[INFO] {os.path.basename(input_path)}: {percent_outliers:.2f}% outliers replaced")
-    df = util.adjust_angle_diff_baseline(df, 0, 120)
+    # df = util.adjust_angle_diff_baseline(df, 0, 120)
     df["trialNum"] = np.arange(1, len(df) + 1, dtype=int)
 
     # Save the modified DataFrame to the output path
