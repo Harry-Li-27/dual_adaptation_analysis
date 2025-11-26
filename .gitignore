@@ -3,4 +3,4 @@ result_analysis/*
 plotting_helper_files/*
 *.pyc
 processed_data/*
-firebase/*
+firebase/dual-adaptation-firebase-adminsdk-fbsvc-7f56dc27e1.json
