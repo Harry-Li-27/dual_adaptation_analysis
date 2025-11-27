@@ -1,0 +1,28 @@
+{
+  "age": "30",
+  "implicit": "3",
+  "affected_arm": "left",
+  "id": "666559e634fffd1ce19ba654",
+  "mousetype": null,
+  "distractions": [
+    ""
+  ],
+  "comments": "No technical issues to report, but I had a harder time getting the white dot on the blue dot than I did the red dot",
+  "ethnicity": "non-hispanic",
+  "sex": "female",
+  "race": "white",
+  "returner": "no",
+  "groupChoice": 2,
+  "dpi": 7947,
+  "currTrial": 510,
+  "tgt_file": "tgt_files/target_files/group2_day1.json",
+  "stem": "yes",
+  "videog": "20",
+  "laptopy": "16",
+  "day": 1,
+  "experimentID": "experiment_trial",
+  "failed_reason": null,
+  "sleep": "10",
+  "handedness": "righth",
+  "distracto": null
+}
