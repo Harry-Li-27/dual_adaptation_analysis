@@ -5,11 +5,18 @@ import util
 import numpy as np
 
 
-def process_single_file(input_path: str, output_path: str) -> None:
+def process_single_file(
+    input_path: str,
+    output_path: str,
+    remove_first_n: int,
+    use_adjust_baseline: bool,
+    baseline_start_idx: int,
+    baseline_end_idx: int,
+) -> None:
     """
-    Read a CSV from input_path, add the 'angle_diff' column using util.compute_angle_diff,
-    apply outlier removal using util.detect_and_replace_outliers, and save the modified
-    DataFrame to output_path.
+    Read a CSV from input_path, compute angle_diff, optionally drop
+    the first N trials, run outlier removal, optionally apply baseline
+    adjustment, and save the result to output_path.
     """
     # Read the CSV into a DataFrame
     df = pd.read_csv(input_path)
@@ -17,14 +24,16 @@ def process_single_file(input_path: str, output_path: str) -> None:
     # Compute and add the 'angle_diff' column
     df = util.compute_angle_diff(df)
 
-    # df = df.iloc[30:].reset_index(drop=True)
-    # if df.empty:
-    #     df.to_csv(output_path, index=False)
-    #     return
+    # Optional: drop first N trials (e.g., warmup/baseline)
+    if remove_first_n > 0:
+        df = df.iloc[remove_first_n:].reset_index(drop=True)
 
-    # Updated: apply outlier removal to the 'angle_diff' column
-    # This will replace any angle_diff outside [-60, 60] by the mean of its neighbors,
-    # and return the percentage of points that were treated as outliers.
+    # If nothing left, just save the empty frame
+    if df.empty:
+        df.to_csv(output_path, index=False)
+        return
+
+    # Outlier removal on angle_diff via Hampel filter
     percent_outliers = util.detect_and_replace_outliers_hampel(
         df,
         window_size=9,
@@ -32,31 +41,84 @@ def process_single_file(input_path: str, output_path: str) -> None:
         replace_with="median",
     )
     print(f"[INFO] {os.path.basename(input_path)}: {percent_outliers:.2f}% outliers replaced")
-    # df = util.adjust_angle_diff_baseline(df, 0, 120)
+
+    # Optional baseline adjustment on angle_diff
+    if use_adjust_baseline:
+        df = util.adjust_angle_diff_baseline(
+            df,
+            baseline_start_idx,
+            baseline_end_idx,
+        )
+
+    # Rebuild trialNum after any trimming
     df["trialNum"] = np.arange(1, len(df) + 1, dtype=int)
 
     # Save the modified DataFrame to the output path
     df.to_csv(output_path, index=False)
 
 
-def process_all_csvs(data_folder: str, result_folder: str) -> None:
+def process_all_csvs(
+    data_folder: str,
+    result_folder: str,
+    remove_first_n: int,
+    use_adjust_baseline: bool,
+    baseline_start_idx: int,
+    baseline_end_idx: int,
+) -> None:
     """
-    Iterate through all .csv files in data_folder, process each one by adding 'angle_diff',
-    removing outliers, and save the result into result_folder with the same filename.
+    Iterate through all .csv files in data_folder, process each one,
+    and save to result_folder with the same filename.
     """
     os.makedirs(result_folder, exist_ok=True)
 
     for fname in tqdm(os.listdir(data_folder)):
-        if not fname.endswith('.csv'):
+        if not fname.endswith(".csv"):
             continue
 
         input_path = os.path.join(data_folder, fname)
         output_path = os.path.join(result_folder, fname)
 
-        process_single_file(input_path, output_path)
+        process_single_file(
+            input_path=input_path,
+            output_path=output_path,
+            remove_first_n=remove_first_n,
+            use_adjust_baseline=use_adjust_baseline,
+            baseline_start_idx=baseline_start_idx,
+            baseline_end_idx=baseline_end_idx,
+        )
+
+
 
 
 if __name__ == "__main__":
-    data_folder = 'data/trials'
-    result_folder = 'processed_data/raw_data_without_outlier'
-    process_all_csvs(data_folder, result_folder)
+
+    # Configuration per “day”
+    DAY_PROCESSING_CONFIG = {
+        "day1": {
+            "data_folder": "data/trials_day1",
+            "result_folder": "processed_data/raw_data_without_outlier_day1",
+            "remove_first_n": 30,       # drop first 30 trials on day1
+            "use_adjust_baseline": False,
+            "baseline_start_idx": 0,
+            "baseline_end_idx": 120,
+        },
+        "day2": {
+            "data_folder": "data/trials_day2",
+            "result_folder": "processed_data/raw_data_without_outlier_day2",
+            "remove_first_n": 0,        # keep all trials on day2
+            "use_adjust_baseline": False,
+            "baseline_start_idx": 0,
+            "baseline_end_idx": 0,
+        },
+    }
+
+    for day_name, cfg in DAY_PROCESSING_CONFIG.items():
+        print(f"[INFO] Processing {day_name} from {cfg['data_folder']} -> {cfg['result_folder']}")
+        process_all_csvs(
+            data_folder=cfg["data_folder"],
+            result_folder=cfg["result_folder"],
+            remove_first_n=cfg["remove_first_n"],
+            use_adjust_baseline=cfg["use_adjust_baseline"],
+            baseline_start_idx=cfg["baseline_start_idx"],
+            baseline_end_idx=cfg["baseline_end_idx"],
+        )
