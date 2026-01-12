@@ -192,12 +192,13 @@ def save_results_to_json(results: Dict[str, Dict[str, object]], output_path: str
 if __name__ == "__main__":
     # Where to save the JSON of keep/remove decisions (shared for both days)
     result_folder = "plotting_helper_files"
+    mode = "no_bad_mt_data_150"
     os.makedirs(result_folder, exist_ok=True)
 
     # ---------------------------
     # Day 1 configuration
     # ---------------------------
-    mode_day1 = "raw_data_without_outlier_day1"
+    mode_day1 = f"{mode}_day1"
     data_folder_day1 = f"processed_data/{mode_day1}"
 
     # Full trial count for Day 1
@@ -236,7 +237,7 @@ if __name__ == "__main__":
     # ---------------------------
     # Day 2 configuration
     # ---------------------------
-    mode_day2 = "raw_data_without_outlier_day2"
+    mode_day2 = f"{mode}_day2"
     data_folder_day2 = f"processed_data/{mode_day2}"
 
     # Full trial count for Day 2

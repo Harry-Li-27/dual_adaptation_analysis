@@ -102,6 +102,8 @@ def fetch_data():
             trial_data = trial_doc.to_dict()
             trial_list_length = len(trial_data.get('trialNum', []))
             for i in range(trial_list_length):
+                workspace_list = trial_data.get('workspace', [])
+                workspace_value = workspace_list[i] if i < len(workspace_list) else None
                 record = {
                     'trialNum': trial_data.get('trialNum', [None])[i],
                     'currentDate': trial_data.get('currentDate', [None])[i],
@@ -118,6 +120,7 @@ def fetch_data():
                         and trial_data.get('movement_trajectory')
                         and i < len(trial_data['movement_trajectory'])
                         else 'N/A',
+                    'workspace': workspace_value,
                     'day': 1,
                 }
                 records_day1.append(record)
@@ -127,6 +130,8 @@ def fetch_data():
             trial_data = trial_doc.to_dict()
             trial_list_length = len(trial_data.get('trialNum', []))
             for i in range(trial_list_length):
+                workspace_list = trial_data.get('workspace', [])
+                workspace_value = workspace_list[i] if i < len(workspace_list) else None
                 record = {
                     'trialNum': trial_data.get('trialNum', [None])[i],
                     'currentDate': trial_data.get('currentDate', [None])[i],
@@ -143,6 +148,7 @@ def fetch_data():
                         and trial_data.get('movement_trajectory')
                         and i < len(trial_data['movement_trajectory'])
                         else 'N/A',
+                    'workspace': workspace_value,
                     'day': 2,
                 }
                 records_day2.append(record)

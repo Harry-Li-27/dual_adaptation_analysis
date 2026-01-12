@@ -41,7 +41,9 @@ def _extract_angle_from_trajectory(
     movement_traj_str: str,
     mt_value: float,
     mt_thresh: float,
-    fallback_angle: float
+    fallback_angle: float,
+    rotation: float,
+    workspace: int = 1,
 ) -> float:
     """
     Given a JSON string representing a list of points with keys 'x', 'y', 't',
@@ -88,10 +90,21 @@ def _extract_angle_from_trajectory(
     # t = ts[idx]
     # print(x, y, "time:", t)
 
-    center_x, center_y = 0.5, 0.5
+    workspace_int = int(workspace)
+
+    if workspace_int == 0:
+        center_x = 0.25
+    elif workspace_int == 2:
+        center_x = 0.75
+    else:
+        center_x = 0.5
+
+    center_y = 0.5
+
     dx = x - center_x
     dy = center_y - y  # invert y for screen coordinates
     angle = np.degrees(np.arctan2(dy, dx))
+    angle = angle - rotation
     if angle < 0:
         angle += 360.0
 
@@ -106,7 +119,21 @@ def _compute_for_invalid(row: pd.Series, mt_thresh: float = 400.0) -> float:
     movement_str = row["movement_trajectory"]
     mt_val = row["mt"]
     fallback = float(row["hand_fb_angle"])
-    return _extract_angle_from_trajectory(movement_str, mt_val, mt_thresh, fallback)
+    rotation = row["rotation"]
+
+    if "workspace" in row.index:
+        workspace = row["workspace"]
+    else:
+        assert False
+
+    return _extract_angle_from_trajectory(
+        movement_str,
+        mt_val,
+        mt_thresh,
+        fallback,
+        rotation,
+        workspace,
+    )
 
 
 def compute_angle_diff_remove_invalid_mt(
