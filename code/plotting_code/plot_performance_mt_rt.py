@@ -205,7 +205,8 @@ def plot_combined(
 def main():
     from tqdm import tqdm
 
-    mode = "no_bad_mt_data_150" #"raw_data_without_outlier" #"no_bad_mt_data_150"
+    # mode = "no_bad_mt_data_150" 
+    mode = "raw_data_without_outlier"
     days = [1, 2]
 
     for day in days:

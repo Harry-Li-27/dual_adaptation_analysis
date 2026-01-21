@@ -192,7 +192,8 @@ def save_results_to_json(results: Dict[str, Dict[str, object]], output_path: str
 if __name__ == "__main__":
     # Where to save the JSON of keep/remove decisions (shared for both days)
     result_folder = "plotting_helper_files"
-    mode = "no_bad_mt_data_150" #"raw_data_without_outlier" #"no_bad_mt_data_150"
+    # mode = "no_bad_mt_data_150"
+    mode = "raw_data_without_outlier"
     os.makedirs(result_folder, exist_ok=True)
 
     # ---------------------------
