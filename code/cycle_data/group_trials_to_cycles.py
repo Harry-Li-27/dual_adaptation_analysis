@@ -3,6 +3,8 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 
+MODE = "mean"
+
 
 def _assert_constant(block: pd.DataFrame, col: str) -> None:
     values = block[col].unique()
@@ -42,7 +44,10 @@ def group_trials_to_cycles(df: pd.DataFrame, group_size: int = 3) -> pd.DataFram
 
         for col in ["rt", "mt", "search_time", "angle_diff"]:
             if col in block.columns:
-                row[col] = pd.to_numeric(block[col], errors="raise").mean()
+                if MODE == "mean":
+                    row[col] = pd.to_numeric(block[col], errors="raise").mean()
+                elif MODE == "median":
+                    row[col] = pd.to_numeric(block[col], errors="raise").median()
             else:
                 assert False, f"{col} not in dataframe columns"
 
