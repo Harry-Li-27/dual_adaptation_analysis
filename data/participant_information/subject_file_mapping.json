@@ -1,54 +1,46 @@
 {
-    "S-experiment_trial_v5_t1-Group1-ID1": {
-        "id": "600417ede34dba180ea778f1",
+    "S-experiment_trial_v6_t1-Group1-ID1": {
+        "id": "1212",
         "completion_status": "unknown",
-        "day1_trials": 696,
-        "day2_trials": 486,
-        "finished_time_day1": "1/19/2026 23:9.8.18",
-        "finished_time_day2": "1/20/2026 22:58.8.997"
-    },
-    "S-experiment_trial_v5_t1-Group1-ID2": {
-        "id": "6142583049e8aba35814f68a",
-        "completion_status": "exceeds break time",
-        "day1_trials": 307,
+        "day1_trials": 40,
         "day2_trials": 0,
-        "finished_time_day1": "1/19/2026 20:39.9.932",
+        "finished_time_day1": "1/27/2026 17:43.9.795",
         "finished_time_day2": ""
     },
-    "S-experiment_trial_v5_t1-Group1-ID3": {
-        "id": "61644b17ec9f97f7485d5624",
+    "S-experiment_trial_v6_t1-Group1-ID2": {
+        "id": "564e93659b124900127eb55b",
         "completion_status": "unknown",
         "day1_trials": 696,
         "day2_trials": 0,
-        "finished_time_day1": "1/19/2026 19:45.8.955",
+        "finished_time_day1": "1/27/2026 22:40.9.372",
         "finished_time_day2": ""
     },
-    "S-experiment_trial_v5_t1-Group1-ID4": {
-        "id": "666f2488909bc0331b8563e6",
+    "S-experiment_trial_v6_t1-Group1-ID3": {
+        "id": "5dd0dce9ed7ea418f59810e4",
         "completion_status": "unknown",
         "day1_trials": 696,
-        "day2_trials": 486,
-        "finished_time_day1": "1/19/2026 20:9.9.456",
-        "finished_time_day2": "1/21/2026 6:42.8.337"
+        "day2_trials": 0,
+        "finished_time_day1": "1/27/2026 21:9.8.7",
+        "finished_time_day2": ""
     },
-    "S-experiment_trial_v5_t1-Group1-ID5": {
-        "id": "695fe4dd32e419257dc815aa",
+    "S-experiment_trial_v6_t1-Group1-ID4": {
+        "id": "669ac4ee9fd9606611b6fcb1",
         "completion_status": "unknown",
         "day1_trials": 696,
-        "day2_trials": 486,
-        "finished_time_day1": "1/19/2026 21:9.57.305",
-        "finished_time_day2": "1/20/2026 23:2.9.577"
+        "day2_trials": 0,
+        "finished_time_day1": "1/27/2026 21:57.9.254",
+        "finished_time_day2": ""
+    },
+    "S-experiment_trial_v6_t1-Group1-ID5": {
+        "id": "66b504cd131c63b36b682b8d",
+        "completion_status": "unknown",
+        "day1_trials": 696,
+        "day2_trials": 0,
+        "finished_time_day1": "1/27/2026 21:9.7.939",
+        "finished_time_day2": ""
     },
     "invalid1": {
-        "id": "671ce7ade7a5cd2edc847b94",
-        "completion_status": "no_trials"
-    },
-    "invalid2": {
-        "id": "676304145bbe20d1fd5d653c",
-        "completion_status": "no_trials"
-    },
-    "invalid3": {
-        "id": "69419c81ee92288e4d87076d",
+        "id": "61061563506ce85595b3455a",
         "completion_status": "no_trials"
     }
 }
