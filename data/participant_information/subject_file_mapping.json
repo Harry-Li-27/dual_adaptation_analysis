@@ -19,19 +19,11 @@
         "id": "5dd0dce9ed7ea418f59810e4",
         "completion_status": "unknown",
         "day1_trials": 696,
-        "day2_trials": 0,
+        "day2_trials": 486,
         "finished_time_day1": "1/27/2026 21:9.8.7",
-        "finished_time_day2": ""
+        "finished_time_day2": "1/28/2026 20:9.8.194"
     },
     "S-experiment_trial_v6_t1-Group1-ID4": {
-        "id": "669ac4ee9fd9606611b6fcb1",
-        "completion_status": "unknown",
-        "day1_trials": 696,
-        "day2_trials": 0,
-        "finished_time_day1": "1/27/2026 21:57.9.254",
-        "finished_time_day2": ""
-    },
-    "S-experiment_trial_v6_t1-Group1-ID5": {
         "id": "66b504cd131c63b36b682b8d",
         "completion_status": "unknown",
         "day1_trials": 696,
