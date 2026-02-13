@@ -102,7 +102,7 @@ def main() -> None:
         with open(decision_json_path, "r") as f:
             removal = json.load(f)
 
-        break_trial_indices = [510 - 30] if day == 1 else [214 - 30]
+        break_trial_indices = [630 - 30] if day == 1 else [214 - 30]
         break_cycle_indices = [int(idx / 3) for idx in break_trial_indices]
 
         for fname in tqdm(os.listdir(data_dir), desc=f"Day {day}"):
